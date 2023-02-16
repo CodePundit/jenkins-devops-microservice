@@ -1,10 +1,11 @@
 pipeline {
-	agent any
+	agent { docker { image 'node:13.8' } }
 	stages {
 
 		stage('Build') {
 			steps {
 				echo "Build"
+			    sh 'node --version'
 			}
 		}
 		stage('Test') {
@@ -22,6 +23,9 @@ pipeline {
 		}
 		failure {
 			echo 'Jenkins Job Failed.'
+		}
+		changed {
+			echo 'Changed no idea from what to what'
 		}
 	}
 }
