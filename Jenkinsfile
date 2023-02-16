@@ -1,11 +1,18 @@
 pipeline {
-	agent { docker { image 'node:13.8' } }
+	agent any
+	// agent { docker { image 'node:13.8' } }
 	stages {
 
 		stage('Build') {
 			steps {
 				echo "Build"
-			    sh 'node --version'
+			    // sh 'node --version'
+				echo "PATH = $PATH"
+				echo "env.JOB_NAME = $env.JOB_NAME"
+				echo "env.JOB_URL = $env.JOB_URL"
+				echo "env.BUILD_TAG = $env.BUILD_TAG"
+				echo "env.BUILD_ID = $env.BUILD_ID"
+				echo "env.BUILD_NUMBER = $env.BUILD_NUMBER"
 			}
 		}
 		stage('Test') {
@@ -17,15 +24,15 @@ pipeline {
 	post {
 		always {
 			echo 'Always'
-		}
-		success {
-			echo 'Jenkins Job Success!'
+		}		
+		changed {
+			echo 'Changed no idea from what to what'
 		}
 		failure {
 			echo 'Jenkins Job Failed.'
 		}
-		changed {
-			echo 'Changed no idea from what to what'
+		success {
+			echo 'Jenkins Job Success!'
 		}
 	}
 }
