@@ -13,4 +13,15 @@ pipeline {
 			}
 		}
 	}
+	post {
+		always {
+			echo 'Always'
+		}
+		success {
+			echo 'Jenkins Job Success!'
+		}
+		failure {
+			echo 'Jenkins Job Failed.'
+		}
+	}
 }
